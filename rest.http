@@ -1,0 +1,157 @@
+# sample data's
+# Admin User Operations
+
+### Register a New Admin User
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin1234",
+  "email": "admin123@example.com",
+  "password": "admin",
+  "isAdmin": true
+}
+
+### Login with Admin Credentials
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin123@example.com",
+  "password": "admin"
+}
+
+### Create a New Public User Profile (Admin)
+POST http://localhost:3000/user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYyY2JjMGI3MDYyNzQ0Mzg3YmQ3NSIsImlzQWRtaW4iOnRydWUsImlzUHVibGljIjp0cnVlLCJpYXQiOjE3MTY0NzQ0OTUsImV4cCI6MTcxNjQ3ODA5NX0.NXSL97v7uHuaeHLI1JseLG9tRRScwxXghGs7UNZiH7M
+
+
+{
+  "username": "dhivya",
+  "email": "dhivya@example.com",
+  "password": "dhivya12345",
+  "photo": "http://example.com/publicphoto.jpg",
+  "name": "Dhivya Dharshni",
+  "bio": "Designer",
+  "phone": "9867876543",
+  "isPublic": true
+}
+
+### Create a New Private User Profile (Admin)
+POST http://localhost:3000/user/
+Content-Type: application/json
+Authorization: Bearer <admin_access_token>
+
+{
+  "username": "privateuser",
+  "email": "privateuser@example.com",
+  "password": "privatepassword",
+  "photo": "http://example.com/privatephoto.jpg",
+  "name": "Private User",
+  "bio": "Private bio",
+  "phone": "0987654321",
+  "isPublic": false
+}
+
+### Get all user data
+GET http://localhost:3000/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYyY2JjMGI3MDYyNzQ0Mzg3YmQ3NSIsImlzQWRtaW4iOnRydWUsImlzUHVibGljIjp0cnVlLCJpYXQiOjE3MTY0NzQ0OTUsImV4cCI6MTcxNjQ3ODA5NX0.NXSL97v7uHuaeHLI1JseLG9tRRScwxXghGs7UNZiH7M
+
+### Get User Profile of Public User by ID (Admin)
+GET http://localhost:3000/user/<<PUBLIC_USER_ID>>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGYyY2JjMGI3MDYyNzQ0Mzg3YmQ3NSIsImlzQWRtaW4iOnRydWUsImlzUHVibGljIjp0cnVlLCJpYXQiOjE3MTY0NzQ0OTUsImV4cCI6MTcxNjQ3ODA5NX0.NXSL97v7uHuaeHLI1JseLG9tRRScwxXghGs7UNZiH7M
+### Get User Profile of Private User by ID (Admin)
+GET http://localhost:3000/user/<<PRIVATE_USER_ID>>
+Authorization: Bearer <admin_access_token>
+
+### Get User Profile of Admin User by ID (Admin)
+GET http://localhost:3000/user/<<ADMIN_USER_ID>>
+Authorization: Bearer <admin_access_token>
+
+### Update Public User Profile (Admin)
+PUT http://localhost:3000/user/<<PUBLIC_USER_ID>>
+Content-Type: application/json
+Authorization: Bearer <admin_access_token>
+
+{
+  "name": "Updated Public User"
+}
+
+### Update Private User Profile (Admin)
+PUT http://localhost:3000/user/<<PRIVATE_USER_ID>>
+Content-Type: application/json
+Authorization: Bearer <admin_access_token>
+
+{
+  "name": "Updated Private User"
+}
+
+### Update Admin User Profile (Admin)
+PUT http://localhost:3000/user/<<ADMIN_USER_ID>>
+Content-Type: application/json
+Authorization: Bearer <admin_access_token>
+
+{
+  "name": "Updated Admin"
+}
+
+### Get All User Profiles (Admin only)
+GET http://localhost:3000/user/
+Authorization: Bearer <admin_access_token>
+
+# Public User Operations
+
+### Register a New Public User
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "publicuser",
+  "email": "publicuser@example.com",
+  "password": "publicpassword",
+  "isPublic": true
+}
+
+### Login with Public User Credentials
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "publicuser@example.com",
+  "password": "publicpassword"
+}
+
+### Create a New Public User Profile
+POST http://localhost:3000/user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NGVlMzc0ODcwNjRmYTNlMTlmMWU5MSIsImlzQWRtaW4iOmZhbHNlLCJpc1B1YmxpYyI6dHJ1ZSwiaWF0IjoxNzE2NDc0NDAzLCJleHAiOjE3MTY0NzgwMDN9.oMhKAMsokdagzlqvwJzvUecsLdkg4Yog9LlpgrtSD2A
+
+{
+  "username": "anotherpublicuser",
+  "email": "anotherpublicuser@example.com",
+  "password": "anotherpublicpassword",
+  "photo": "http://example.com/publicphoto.jpg",
+  "name": "Another Public User",
+  "bio": "Another public bio",
+  "phone": "1234567890",
+  "isPublic": true
+}
+
+
+### Get User Profile of Public User by ID
+GET http://localhost:3000/user/<<PUBLIC_USER_ID>>
+Authorization: Bearer <public_user_access_token>
+
+### Update Own Public User Profile
+PUT http://localhost:3000/user/<<PUBLIC_USER_ID>>
+Content-Type: application/json
+Authorization: Bearer <public_user_access_token>
+
+{
+  "name": "Updated Public User"
+}
+
+
+
+GET http://localhost:3000/localhost:3000/auth/github
